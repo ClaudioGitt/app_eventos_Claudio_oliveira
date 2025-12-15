@@ -1,6 +1,16 @@
-<div class="container">
-    <footer>
-        <b>&copy;</b><b><span class="year ms-auto me-2 mb-lg-0" ></b></span> <b>Autor:</b> Claudio oliveira
-    </footer>
-</div>
 
+<body>
+    <footer>
+        <div class="container-footer">
+            <p>
+                &copy; <span id="dataAtual"></span>
+                <a id="cppy"><b>Todos os direitos reservados</b></a>
+            </p>
+        </div>
+    </footer>
+    <script>
+        var currentYear = new Date().getFullYear();
+        document.getElementById("dataAtual").innerHTML = currentYear;
+    </script>
+</body>
+</html>

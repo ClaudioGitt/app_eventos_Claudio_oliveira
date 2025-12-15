@@ -1,5 +1,54 @@
 {% extends 'base.html' %}
+
 {% block title %}Eventos{% endblock %}
+
 {% block content %}
-    <h1 class="container"></h1>
+<h1 class="title" style="text-align: center;">Eventos</h1><br>
+
+<div class="content">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <div class="alert alert-success">{{ msg }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    {% if eventos and eventos|length > 0 %}
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thread>
+                    <!-- tr é o cabeçalho da coluna e tals -->
+                    <tr>
+                        <th><b>Nome</b></th>
+                        <th><b>Data</b></th>
+                        <th><b>Hora</b></th>
+                        <th><b>Idade Mínima</b></th>
+                        <th><b>Local</b></th>
+                        <th><b>Cidade</b></th>
+                        <th><b>UF</b></th>
+                        <th><b>CEP</b></th>
+                    </tr>
+                </thread>
+                <body>
+                    {% for e in eventos %}
+                    <!-- cada tr é um evento e cada td é um campo do evento -->
+                        <tr>
+                            <td>{{ e.nome }}</td>
+                            <td>{{ e.data.strftime('%d/%m/%Y') if e.data else '--/--/--' }}</td>
+                            <td>{{ e.hora.strftime('%H:%M') if e.hora else 'Horário livre'}}</td>
+                            <td>{{ e.idade_minima if e.idade_minima is not none else '--'}}</td>
+                            <td>{{ e.local}}</td>
+                            <td>{{ e.cidade}}</td>
+                            <td>{{ e.uf}}</td>
+                            <td>{{ e.cep}}</td>
+                        </tr>
+                    {% endfor %}
+                </body>
+            </table>
+        </div>
+    {% else %}
+        <p class="text-muted">Nenhum evento cadastrado</p>
+    {% endif %}
+</div>
 {% endblock %}

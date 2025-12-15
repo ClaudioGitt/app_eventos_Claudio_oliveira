@@ -1,0 +1,81 @@
+{% extends 'base.html' %}¨
+{% block title %}Sobre o site{% endblock %}
+{% block content %}
+<style>
+    h1 {
+        text-align: center;
+        padding: 10px;
+    }
+
+    h2 {
+        padding: 10px;
+    }
+
+    p {
+        padding: 10px;
+    }
+    body{
+        background-color: white;
+    }
+</style>
+
+<body>
+    <h1>Sobre este site</h1><br>
+    <h2><b>Este site está em desenvolvimento com a mentoria do professor <a
+                href="https://github.com/alexmachadoribeiro">Alex Machado Ribeiro</a></b></h2><br>
+    <p style="font-size:large;"><b>Conteúdo do curso:</b></p>
+    <ul>
+        <li><b>Lógica da programação</b></li>
+        <ul>
+            <li>Variáveis</li>
+            <li>Tipos de dados</li>
+            <li>Concatenação</li>
+            <li>Entrada de dados</li>
+            <li>Tratamento de entrada de dados</li>
+            <li>Estrutura de decisão</li>
+            <li>Tratamento de exceção</li>
+            <li>Loops</li>
+        </ul><br>
+        <li><b>Imports de módulos</b></li>
+        <ul>
+            <li>OS</li>
+            <li>Time</li>
+            <li>Math</li>
+        </ul><br>
+        <li><b>Coleções</b></li>
+        <ul>
+            <li>Listas [ ]</li>
+            <li>Tuplas ( )</li>
+            <li>Dicionários { }</li>
+        </ul><br>
+        <li><b>Funções</b></li>
+        <ul>
+            <li>def boas_vindas():<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Seja bem vindo!👌")</li>
+        </ul><br>
+        <li><b>Orientação a objetos</b></li>
+        <ul>
+            <li>Classe</li>
+            <li>Construtor</li>
+            <li>Herança</li>
+            <li>Encapsulamento</li>
+            <li>Abstração</li>
+            <li>Métodos especiais</li>
+            <li>Dataclasses</li>
+        </ul><br>
+        <li><b>Banco de dados</b></li>
+        <ul>
+            <li>Create</li>
+            <li>Read</li>
+            <li>Update</li>
+            <li>Delete</li>
+        </ul><br>
+    </ul>
+    <p>Foram utilizadas frameworks e microframeworks como <a href="https://flet.dev/docs/">Flet</a> e <a
+            href="https://flask.palletsprojects.com/en/stable/">Flask
+        </a>
+        .Foi ensinado também a habilidade de leitura de erros do console, consulta de documentações, raciocínio lógico.
+    </p>
+    <p><b>Aluno:&nbsp;</b>Claudio oliveira <br><b>Github:&nbsp;</b><a href="https://github.com/ClaudioGitt">ClaudioGitt</a></p>
+</body>
+{% endblock %}

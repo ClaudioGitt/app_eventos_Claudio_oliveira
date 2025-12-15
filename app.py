@@ -1,17 +1,18 @@
-from flask import Flask, render_template,request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
+
 from datetime import datetime
 import os
 
 app = Flask(__name__)
-# Estrutura básica Flask
-app.config["SECRET_KEY"] = 'dev'
+app.config['SECRET_KEY'] = 'dev'
 basedir = os.path.abspath(os.path.dirname(__file__))
 db_path = os.path.join(basedir, 'database')
 os.makedirs(db_path, exist_ok=True)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(db_path,'events.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(db_path, 'events.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db=SQLAlchemy(app)
+
+db = SQLAlchemy(app)
 
 class Evento(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -21,8 +22,9 @@ class Evento(db.Model):
     hora = db.Column(db.Time)
     cep = db.Column(db.String(20))
     uf = db.Column(db.String(2))
-    cidade = db.Column(db.String(200))
+    cidade = db.Column(db.String(100))
     local = db.Column(db.String(200))
+
 def create_tables():
     try:
         with app.app_context():
@@ -32,12 +34,15 @@ def create_tables():
 
 @app.route("/")
 def index():
-    eventos = Evento.query.order_by(Evento.data).all()
+    eventos = Evento.query.all()
     return render_template("index.html", eventos=eventos)
 
-@app.route("/cadastrar-evento", methods=["GET","POST"])
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+@app.route("/cadastrar-evento", methods=["GET", "POST"])
 def cadastrar_evento():
-    # Get recebe, POST envia para o banco
     if request.method == 'POST':
         nome = request.form.get('evento')
         idade = request.form.get('idade')
@@ -48,31 +53,27 @@ def cadastrar_evento():
         cidade = request.form.get('cidade')
         local = request.form.get('local')
 
-        idade_val = int(idade) if idade else None # verifica apenas se existe algum valor
+        idade_val = int(idade) if idade else None
         data_val = datetime.strptime(data_str, "%Y-%m-%d").date() if data_str else None
         hora_val = datetime.strptime(hora_str, "%H:%M").time() if hora_str else None
-        
+
         evento = Evento(
-            nome = nome,
-            idade_minima = idade_val,
-            data = data_val,
-            hora = hora_val,
-            cep = cep,
-            uf = uf,
-            cidade = cidade,
-            local = local
+            nome=nome,
+            idade_minima=idade_val,
+            data=data_val,
+            hora=hora_val,
+            cep=cep,
+            uf=uf,
+            cidade=cidade,
+            local=local
         )
-        # abrir sessão após a instância do objeto
+
         db.session.add(evento)
         db.session.commit()
-        flash('Evento cadastrado com sucesso!')
-        # retornando com redirect
+        flash('Evento cadastrado com sucesso.')
         return redirect(url_for('index'))
-        # verificando se existe algum valor
-        # o redirect só funciona por causa do render template
+    
     return render_template("cadastrar-evento.html")
-# Com flask, só dá para trabalhar com banco usando o flask_sqlalchemy
-# base herda das outras paginas, e index herda da base para aplicar
 
 if __name__ == "__main__":
     create_tables()
