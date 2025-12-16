@@ -72,6 +72,10 @@ def cadastrar_evento():
     
     return render_template("cadastrar-evento.html")
 
+@app.route("/about")
+def sobre():
+    return render_template("about.html")
+
 if __name__ == "__main__":
     create_tables()
     app.run(debug=True)
