@@ -3,12 +3,16 @@ footer {
     right: 0;
     width: 100%;
     padding: 10px 20px;
+    background-color: black;
 }
 main{
     flex: 1;
+    background-color: aliceblue;
+    padding: 2%;
 }
 .container-footer {
     text-align: right;
+    color: white;
 }
 body{
     display: flex;

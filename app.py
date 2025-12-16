@@ -34,16 +34,13 @@ def create_tables():
 
 @app.route("/")
 def index():
-    eventos = Evento.query.all()
+    eventos = Evento.query.order_by(Evento.data).all()
     return render_template("index.html", eventos=eventos)
-
-@app.route("/about")
-def about():
-    return render_template("about.html")
 
 @app.route("/cadastrar-evento", methods=["GET", "POST"])
 def cadastrar_evento():
     if request.method == 'POST':
+        
         nome = request.form.get('evento')
         idade = request.form.get('idade')
         data_str = request.form.get('data')
