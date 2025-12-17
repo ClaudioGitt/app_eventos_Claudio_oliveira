@@ -34,7 +34,7 @@
                     {% for e in eventos %}
                     <!-- cada tr é um evento e cada td é um campo do evento -->
                         <tr>
-                            <td>{{ e.nome }}</td>
+                            <td><a href="{{ url_for('evento', evento_id=e.id) }}">{{ e.nome }}</a></td>
                             <td>{{ e.data.strftime('%d/%m/%Y') if e.data else '--/--/--' }}</td>
                             <td>{{ e.hora.strftime('%H:%M') if e.hora else 'Horário livre'}}</td>
                             <td>{{ e.idade_minima if e.idade_minima is not none else '--'}}</td>

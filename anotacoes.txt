@@ -1,2 +1,0 @@
-No jinja, é importante que essa estrutura {% %}, não pode haver espaços...tem que ser ex:
-{% block title %}{% endblock %}
